@@ -1,4 +1,4 @@
-'use strict';
+"use strict";
 
 /*
 OBJECT ORIENTED PROGRAMING (OOP)
@@ -462,39 +462,39 @@ Inheritance between Classes - constructor functions - LECTURE 218
 
 */
 
-const Person = function (firstName, birthYear) {
-  this.firstName = firstName;
-  this.birthYear = birthYear;
-};
+// const Person = function (firstName, birthYear) {
+//   this.firstName = firstName;
+//   this.birthYear = birthYear;
+// };
 
-Person.prototype.calcAge = function () {
-  console.log(2037 - this.birthYear);
-};
+// Person.prototype.calcAge = function () {
+//   console.log(2037 - this.birthYear);
+// };
 
-const Student = function (firstName, birthYear, course) {
-  Person.call(this, firstName, birthYear);
-  this.course = course;
-};
+// const Student = function (firstName, birthYear, course) {
+//   Person.call(this, firstName, birthYear);
+//   this.course = course;
+// };
 
-// Linking prototypes
-Student.prototype = Object.create(Person.prototype);
+// // Linking prototypes
+// Student.prototype = Object.create(Person.prototype);
 
-Student.prototype.introduce = function () {
-  console.log(`My name is ${this.firstName} and i study ${this.course}`);
-};
+// Student.prototype.introduce = function () {
+//   console.log(`My name is ${this.firstName} and i study ${this.course}`);
+// };
 
-const mike = new Student('Mike', 2020, 'Computer science');
-console.log(mike);
-mike.introduce();
-mike.calcAge();
+// const mike = new Student("Mike", 2020, "Computer science");
+// console.log(mike);
+// mike.introduce();
+// mike.calcAge();
 
-console.log(mike.__proto__);
-console.log(mike.__proto__.__proto__);
-console.log(mike.__proto__.__proto__.__proto__);
+// console.log(mike.__proto__);
+// console.log(mike.__proto__.__proto__);
+// console.log(mike.__proto__.__proto__.__proto__);
 
-console.log(mike instanceof Student);
-console.log(mike instanceof Person);
-console.log(mike instanceof Object);
+// console.log(mike instanceof Student);
+// console.log(mike instanceof Person);
+// console.log(mike instanceof Object);
 
 /*
 
@@ -503,53 +503,351 @@ CODING CHALLENGE #03
 
 */
 
+// const Car = function (make, speed) {
+//   this.make = make;
+//   this.speed = speed;
+// };
+
+// Car.prototype.accelerate = function () {
+//   this.speed += 10;
+//   this.charge -= 1;
+//   console.log(
+//     `${this.make} going at ${this.speed} km/h, at a charge ${this.charge}%`
+//   );
+// };
+
+// const EV = function (make, speed, charge) {
+// You need to call the parent object using the this keyword .call(this, ...., ...)
+// Car.call(this, make, speed);
+// this.charge = charge;
+// };
+
+// // Always do this to link the parent and child objects
+// // EV.prototype = Object.create(Car.prototype);
+
+// // EV.prototype.chargeBattery = function (chargeTo) {
+// //   this.charge = chargeTo;
+// };
+
+// Polymorphism the data takes the method below (the child method ) instead of the Car method
+
+// EV.prototype.accelerate = function () {
+//   this.speed += 20;
+//   this.charge -= 1;
+//   console.log(
+//     `${this.make} going at ${this.speed} km/h, at a charge ${this.charge}%`
+//   );
+// };
+
+// EV.prototype.brake = function () {
+//   this.speed -= 5;
+//   this.charge += 10;
+//   console.log(
+//     `${this.make} going at ${this.speed} km/h, at a charge ${this.charge}%`
+//   );
+// };
+// const data = new EV("Tesla", 120, 23);
+
+// data.chargeBattery(90);
+// console.log(data);
+// data.accelerate();
+// data.accelerate();
+// data.accelerate();
+
+/*
+
+Inheritance betweeen Classes ES6 classes
+
+
+*/
+// class PersonCl {
+//   constructor(fullName, birthYear) {
+//     this.fullName = fullName;
+//     this.birthYear = birthYear;
+//   }
+//   // Methods will be added to the .prototype property
+//   calcAge() {
+//     console.log(2037 - this.birthYear);
+//   }
+//   greet() {
+//     console.log(`Hey ${this.firstName} you are born in ${this.birthYear}`);
+//   }
+
+//   get age() {
+//     return 2037 - this.birthYear;
+//   }
+
+//   set fullName(name) {
+//     console.log(name);
+//     if (name.includes(" ")) this._fullName = name;
+//     else alert(`The ${name} is not a full name`);
+//   }
+
+//   get fullNAme() {
+//     return this._fullName;
+//   }
+//   // static method
+//   static hey() {
+//     console.log(`Hey there :)`);
+//     console.log(this);
+//   }
+// }
+
+// // Child class - inhreitance with  with extencd and the name.
+// class StudentCl extends PersonCl {
+//   constructor(fullName, birthYear, course) {
+//     // Call the super function instead of the call function
+//     // Needs to happen first in the function always
+//     super(fullName, birthYear);
+//     this.course = course;
+//   }
+//   introduce() {
+//     console.log(`My name is ${this.fullNAme} and I study ${this.course}`);
+//   }
+//   calcAge() {
+//     console.log(
+//       `I am ${2037 - this.birthYear} but as a student i feel more like ${
+//         2037 - this.birthYear + 10
+//       }`
+//     );
+//   }
+// }
+
+// const martha = new StudentCl("Martha Jones", 2012, "Computer Science");
+// martha.introduce();
+// martha.calcAge();
+
+/*
+
+Inheritance betweeen Classes Object.create
+
+
+*/
+
+// const PersonProto = {
+//   calcAge() {
+//     console.log(2037 - this.birthYear);
+//   },
+
+//   init(firstName, birthYear) {
+//     this.firstName = firstName;
+//     this.birthYear = birthYear;
+//   },
+// };
+
+// const steven = Object.create(PersonProto);
+
+// const StudentProto = Object.create(PersonProto);
+// const jay = Object.create(StudentProto);
+
+// StudentProto.init = function (firstName, birthYear, course) {
+//   PersonProto.init.call(this, firstName, birthYear);
+//   this.course = course;
+// };
+
+// StudentProto.introduce = function () {
+//   console.log(`My name is ${this.firstName} and I study ${this.course}`);
+// };
+// jay.init("Jay", 2010, "Computer Science");
+// jay.introduce();
+// jay.calcAge();
+
+/*
+
+ANOTHER CLASS EXAMPLE - LECTURE 222
+
+
+*/
+
+// class Account {
+//   constructor(owner, currency, pin) {
+//     this.owner = owner;
+//     this.currency = currency;
+//     this._pin = pin;
+//     // Protected property
+//     this._movements = [];
+//     this.locale = navigator.language;
+//     console.log(`Thank you for opening an account, ${owner}`);
+//   }
+//   // Public interface of our objects or API
+
+//   getMovements() {
+//     return this._movements;
+//   }
+//   deposit(val) {
+//     this._movements.push(val);
+//   }
+//   withdraw(val) {
+//     this.deposit(-val);
+//   }
+//   _approveLoan(val) {
+//     return true;
+//   }
+//   requestLoan(val) {
+//     if (this._approveLoan(val)) {
+//       this.deposit(val);
+//       console.log(`Loan approved`);
+//     }
+//   }
+// }
+
+// const acc1 = new Account("Jonas", "EUR", 1111);
+
+// acc1.deposit(250);
+// acc1.withdraw(140);
+// acc1.requestLoan(1000);
+// acc1._approveLoan(1000);
+// console.log(acc1);
+
+// console.log(acc1.pin);
+// console.log(acc1.getMovements());
+/*
+
+ENCAPSULATION PROTECTED PROPERTIES AND METHODS
+
+
+*/
+
+// 1. To prevent code outside of the class to manipulate the data inside
+//  2. When we expose small API
+
+// Fake encapsulation - data protection
+// using the _ sign in front of functions or properties
+/*
+
+ENCAPSULATION PRIVATE CLASS FIELDS AND METHODS
+Should become available in the future
+
+*/
+
+// 1.Public fields
+// 2.Private fields
+// 3.Public methods
+// 4.Private methods
+// class Account {
+//   // Public fields (instances) - how to declare
+//   locale = navigator.language;
+
+//   // Private fields (instances) - still not fully available in JS
+//   #movements = [];
+//   #pin;
+
+//   constructor(owner, currency, pin) {
+//     this.owner = owner;
+//     this.currency = currency;
+//     // Protected property
+//     this.#pin = pin;
+//     this.#movements = [];
+//     this.locale = navigator.language;
+//     console.log(`Thank you for opening an account, ${owner}`);
+//   }
+//   // Public interface of our objects or API
+//   // Public methods
+//   //  Static version
+//   getMovements() {
+//     return this.#movements;
+//   }
+//   deposit(val) {
+//     this.#movements.push(val);
+//     return this;
+//   }
+//   withdraw(val) {
+//     this.deposit(-val);
+//     return this;
+//   }
+
+//   requestLoan(val) {
+//     if (this._approveLoan(val)) {
+//       this.deposit(val);
+//       console.log(`Loan approved`);
+//       return this;
+//     }
+//   }
+//   // Private methods - hide the implementation not yet fully functional in JS
+//   // Doesnt work
+//   // #approveLoan(val)
+//   _approveLoan(val) {
+//     return true;
+//   }
+
+//   //  Static version
+//   static helper() {
+//     console.log(`Hello`);
+//   }
+// }
+
+// const acc1 = new Account("Jonas", "EUR", 1111);
+
+// acc1.deposit(250);
+// acc1.withdraw(140);
+// acc1.requestLoan(1000);
+// // acc1.#approveLoan(1000);
+// console.log(acc1);
+
+// console.log(acc1.pin);
+// console.log(acc1.getMovements());
+
+// console.log(acc1.#approveLoan(100));
+
+// console.log(acc1.#movements); // Cannot access it with the #
+
+/*
+
+CHAINING METHODS
+
+*/
+
+// Chaining methods in the methods of the class
+
+// acc1.deposit(300).deposit(500).withdraw(35).requestLoan(25000).withdraw(4000);
+// console.log(acc1.getMovements());
+
+/*
+
+CHALLENGE #04
+
+*/
+
 const Car = function (make, speed) {
   this.make = make;
   this.speed = speed;
 };
 
-Car.prototype.accelerate = function () {
-  this.speed += 10;
-  this.charge -= 1;
-  console.log(
-    `${this.make} going at ${this.speed} km/h, at a charge ${this.charge}%`
-  );
-};
+class EVCl extends Car {
+  #charge;
+  constructor(make, speed, charge) {
+    super(make, speed);
+    this.#charge = charge;
+  }
+  chargeBattery = function (chargeTo) {
+    this.#charge = chargeTo;
+    return this;
+  };
+  accelerate = function () {
+    this.speed += 20;
+    this.#charge -= 1;
+    console.log(
+      `${this.make} going at ${this.speed} km/h, at a charge ${this.#charge}%`
+    );
+    return this;
+  };
+  brake = function () {
+    this.speed -= 5;
+    this.#charge += 10;
+    console.log(
+      `${this.make} going at ${this.speed} km/h, at a charge ${this.#charge}%`
+    );
+    return this;
+  };
+}
 
-const EV = function (make, speed, charge) {
-  // You need to call the parent object using the this keyword .call(this, ...., ...)
-  Car.call(this, make, speed);
-  this.charge = charge;
-};
+const data = new EVCl("Rivian", 120, 23);
+data
+  .accelerate()
+  .accelerate()
+  .accelerate()
+  .brake()
+  .chargeBattery(50) // It need value in order to work
+  .accelerate();
 
-// Always do this to link the parent and child objects
-EV.prototype = Object.create(Car.prototype);
-
-EV.prototype.chargeBattery = function (chargeTo) {
-  this.charge = chargeTo;
-};
-
-// Polymorphism the data takes the method below (the child method ) instead of the Car method
-
-EV.prototype.accelerate = function () {
-  this.speed += 20;
-  this.charge -= 1;
-  console.log(
-    `${this.make} going at ${this.speed} km/h, at a charge ${this.charge}%`
-  );
-};
-
-EV.prototype.brake = function () {
-  this.speed -= 5;
-  this.charge += 10;
-  console.log(
-    `${this.make} going at ${this.speed} km/h, at a charge ${this.charge}%`
-  );
-};
-const data = new EV('Tesla', 120, 23);
-
-data.chargeBattery(90);
-console.log(data);
-data.accelerate();
-data.accelerate();
-data.accelerate();
+// console.log(data.chargeBattery());
